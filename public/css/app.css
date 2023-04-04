@@ -1,0 +1,291 @@
+@font-face {
+    font-family: 'Lexend';
+    src: url(/fonts/Lexend-VariableFont_wght.ttf?ca595aeaae636593c5fe39bd3731234f) format("truetype");
+}
+
+:root {
+    --bs-body-bg: #131315 !important;
+    --bs-dark: #131315 !important;
+    --bs-dark-rgb: #131315 !important;
+}
+
+.vc-light {
+    --vc-bg: #131315;
+}
+
+.pink-event {
+    color: #FF4E6B;
+}
+
+.vc-pink-event {
+    --vc-accent-50:  #FF4E6B !important;
+    --vc-accent-100: #FF4E6B !important;
+    --vc-accent-200: #FF4E6B !important;
+    --vc-accent-300: #FF4E6B !important;
+    --vc-accent-400: #FF4E6B !important;
+    --vc-accent-500: #FF4E6B !important;
+    --vc-accent-600: #FF4E6B !important;
+    --vc-accent-700: #FF4E6B !important;
+    --vc-accent-800: #FF4E6B !important;
+    --vc-accent-900: #FF4E6B !important;
+}
+
+.blue-event {
+    color: #4DB4FF;
+}
+
+.vc-blue-event {
+    --vc-accent-50:  #4DB4FF !important;
+    --vc-accent-100: #4DB4FF !important;
+    --vc-accent-200: #4DB4FF !important;
+    --vc-accent-300: #4DB4FF !important;
+    --vc-accent-400: #4DB4FF !important;
+    --vc-accent-500: #4DB4FF !important;
+    --vc-accent-600: #4DB4FF !important;
+    --vc-accent-700: #4DB4FF !important;
+    --vc-accent-800: #4DB4FF !important;
+    --vc-accent-900: #4DB4FF !important;
+}
+
+.green-event {
+    color: #00CC66;
+}
+
+.vc-green-event {
+    --vc-accent-50:  #00CC66 !important;
+    --vc-accent-100: #00CC66 !important;
+    --vc-accent-200: #00CC66 !important;
+    --vc-accent-300: #00CC66 !important;
+    --vc-accent-400: #00CC66 !important;
+    --vc-accent-500: #00CC66 !important;
+    --vc-accent-600: #00CC66 !important;
+    --vc-accent-700: #00CC66 !important;
+    --vc-accent-800: #00CC66 !important;
+    --vc-accent-900: #00CC66 !important;
+}
+
+.yellow-event {
+    color: #FFBB33;
+}
+
+.vc-yellow-event {
+    --vc-accent-50:  #FFBB33 !important;
+    --vc-accent-100: #FFBB33 !important;
+    --vc-accent-200: #FFBB33 !important;
+    --vc-accent-300: #FFBB33 !important;
+    --vc-accent-400: #FFBB33 !important;
+    --vc-accent-500: #FFBB33 !important;
+    --vc-accent-600: #FFBB33 !important;
+    --vc-accent-700: #FFBB33 !important;
+    --vc-accent-800: #FFBB33 !important;
+    --vc-accent-900: #FFBB33 !important;
+}
+
+body {
+    font-family: 'Lexend', serif !important;
+}
+
+header, footer {
+    background-color: #131315;
+}
+
+.header-border {
+    border-bottom: 2px solid rgba(255, 78, 107, 0.16);
+}
+
+header .nav-link {
+    color: #FFF;
+    margin-left: 20px;
+}
+
+header .nav-link:hover {
+    color: #FF4E6B;
+    border-bottom: 2px solid rgba(255, 78, 107, 1);
+}
+
+header .navbar-brand {
+    color: #FF4E6B;
+}
+
+.navbar-expand-lg {
+    padding-bottom: 0 !important;
+}
+
+.vc-monthly .is-not-in-month * {
+    opacity: 0.25 !important;
+}
+
+.meeting {
+    background: rgba(255, 78, 107, 0.16);
+    color: #FF4E6B;
+}
+
+.qa {
+    background: rgba(0, 204, 102, 0.16);
+    color: #00CC66;
+}
+
+.conference {
+    background: rgba(255, 187, 51, 0.16);
+    color: #FFBB33;
+}
+
+.webinar {
+    background: rgba(77, 180, 255, 0.16);
+    color: #4DB4FF;
+}
+
+.meeting.selected  {
+    background: #FF4E6B;
+    color: #000000;
+}
+
+.qa.selected  {
+    background: #00CC66;
+    color: #000000;
+}
+
+.conference.selected  {
+    background: #FFBB33;
+    color: #000000;
+}
+
+.webinar.selected  {
+    background: #4DB4FF;
+    color: #000000;
+}
+
+.vc-arrow {
+    display: none !important;
+}
+
+.vc-popover-content {
+    position: relative;
+    color: var(--vc-popover-content-color);
+    font-weight: var(--vc-font-medium);
+    background-color: var(--bs-body-bg) !important;
+    border: 1px solid;
+    border-color: var(--vc-popover-content-border);
+    border-radius: var(--vc-rounded-lg);
+    padding: 4px;
+    outline: none;
+    z-index: 10;
+    box-shadow: var(--vc-shadow-lg);
+}
+
+.popoverEvent {
+    box-shadow: 0px 4px 16px 0px #00000066;
+    background: var(--bs-body-bg);
+    padding: 15px;
+    width: 350px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+h3.title {
+    border-bottom: 1px solid rgba(255, 78, 107, 0.16);
+    padding-bottom: 7px;
+}
+
+.eventTitle {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 28px;
+    position: relative;
+}
+
+.eventCardText {
+    font-style: normal;
+    font-weight: 200;
+    font-size: 14px;
+    line-height: 20px;
+    color: #FFFAFB;
+}
+
+.location {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #797979;
+}
+
+.date {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.type {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 14px;
+    padding: 4px 8px;
+    border-radius: 10px;
+}
+
+.eventCard {
+    border-bottom: 1px solid rgba(255, 78, 107, 0.16);
+    padding: 7px 0;
+    margin: 7px 0;
+}
+
+.eventCardFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.addEventBtn {
+    background: #FF4E6B;
+    color: #000000;
+    padding: 8px 16px;
+    border: none;
+    margin-top: 15px;
+}
+
+.cancelBtn {
+    color: #FF4E6B;
+    font-weight: 600;
+    padding: 8px 16px;
+    border: none;
+    background: transparent;
+    margin-top: 15px;
+}
+
+.vc-popover-content {
+    border: none !important;
+}
+
+.modal-content form input, .modal-content form textarea, .modal-content form select {
+    width: 100%;
+    margin: 5px 0;
+    padding: 5px 10px;
+    border: none;
+    color: #fff;
+    background: rgba(255, 250, 251, 0.04);
+}
+
+.modal-content option {
+    background: #1a1a1a
+}
+
+.dateTimeRow {
+    display: flex;
+    align-items: center;
+}
+
+.dateTimeRow span {
+    width: 100%;
+    display: block;
+}
+
+button.edit-btn {
+    position: absolute;
+    right: 0;
+    background: none;
+    border: none;
+}
+
