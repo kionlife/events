@@ -27,8 +27,10 @@
                 </select>
 
                 <div class="btn-group d-flex justify-content-end align-center">
+                    <button v-if="editMode" class="addEventBtn" type="button">Delete</button>
                     <button class="cancelBtn" @click.prevent="$emit('close')">Close</button>
-                    <button class="addEventBtn" type="submit">Add Event</button>
+                    <button v-if="editMode" class="addEventBtn" type="submit">Save</button>
+                    <button v-else class="addEventBtn" type="submit">Add Event</button>
                 </div>
             </form>
         </div>
@@ -105,8 +107,19 @@ export default {
         },
         async submitEditForm() {
             try {
-                // Make an API call to update the event
-                // Emit the eventUpdated event to update the parent component
+                const date = this.event.date;
+                const time = this.event.time;
+
+                await axios.put(`/api/events/${this.event.id}`, {
+                    name: this.event.name,
+                    description: this.event.description,
+                    date: date,
+                    time: time,
+                    location: this.event.location,
+                    type: this.event.type,
+                });
+                this.$emit("eventEdited");
+                this.$emit("close");
             } catch (error) {
                 console.error("Error updating event:", error);
             }

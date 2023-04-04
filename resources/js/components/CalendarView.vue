@@ -43,7 +43,7 @@
                             </div>
                             <div class="eventCardFooter" :class="event.customData.color">
                                 <div class="date">
-                                    {{ event.customData.event.date }}
+                                    {{ event.customData.event.date }} at {{ event.customData.event.time }}
                                 </div>
                                 <div :class="'type ' + event.customData.event.type">
                                     {{ event.customData.type }}
@@ -167,8 +167,6 @@ export default {
         },
         closeAddEventModal() {
             this.showAddEventModal = false;
-            this.selectedEvent = null;
-            this.editMode = false;
         },
         toggleFilter(type) {
             if (this.selectedEventTypes.includes(type)) {

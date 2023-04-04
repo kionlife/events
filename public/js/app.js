@@ -21009,21 +21009,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     submitEditForm: function submitEditForm() {
+      var _this2 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        var date, time;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
             case 0:
-              try {
-                // Make an API call to update the event
-                // Emit the eventUpdated event to update the parent component
-              } catch (error) {
-                console.error("Error updating event:", error);
-              }
-            case 1:
+              _context2.prev = 0;
+              date = _this2.event.date;
+              time = _this2.event.time;
+              _context2.next = 5;
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].put("/api/events/".concat(_this2.event.id), {
+                name: _this2.event.name,
+                description: _this2.event.description,
+                date: date,
+                time: time,
+                location: _this2.event.location,
+                type: _this2.event.type
+              });
+            case 5:
+              _this2.$emit("eventEdited");
+              _this2.$emit("close");
+              _context2.next = 12;
+              break;
+            case 9:
+              _context2.prev = 9;
+              _context2.t0 = _context2["catch"](0);
+              console.error("Error updating event:", _context2.t0);
+            case 12:
             case "end":
               return _context2.stop();
           }
-        }, _callee2);
+        }, _callee2, null, [[0, 9]]);
       }))();
     },
     formatDate: function formatDate(date) {
@@ -21195,8 +21212,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     closeAddEventModal: function closeAddEventModal() {
       this.showAddEventModal = false;
-      this.selectedEvent = null;
-      this.editMode = false;
     },
     toggleFilter: function toggleFilter(type) {
       if (this.selectedEventTypes.includes(type)) {
@@ -21296,13 +21311,21 @@ var _hoisted_10 = [_hoisted_6, _hoisted_7, _hoisted_8, _hoisted_9];
 var _hoisted_11 = {
   "class": "btn-group d-flex justify-content-end align-center"
 };
-var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "addEventBtn",
-    type: "submit"
-  }, "Add Event", -1 /* HOISTED */);
-});
-
+var _hoisted_12 = {
+  key: 0,
+  "class": "addEventBtn",
+  type: "button"
+};
+var _hoisted_13 = {
+  key: 1,
+  "class": "addEventBtn",
+  type: "submit"
+};
+var _hoisted_14 = {
+  key: 2,
+  "class": "addEventBtn",
+  type: "submit"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.editMode ? "Edit Event" : "Add Event"), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     onSubmit: _cache[7] || (_cache[7] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
@@ -21353,12 +21376,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $data.event.type = $event;
     }),
     required: ""
-  }, _hoisted_10, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.event.type]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, _hoisted_10, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.event.type]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [$props.editMode ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_12, "Delete")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "cancelBtn",
     onClick: _cache[6] || (_cache[6] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
       return _ctx.$emit('close');
     }, ["prevent"]))
-  }, "Close"), _hoisted_12])], 32 /* HYDRATE_EVENTS */)])]);
+  }, "Close"), $props.editMode ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_13, "Save")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_14, "Add Event"))])], 32 /* HYDRATE_EVENTS */)])]);
 }
 
 /***/ }),
@@ -21477,7 +21500,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, ["stop"])
         }, _hoisted_13, 8 /* PROPS */, _hoisted_11)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(event.customData.event.description), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(event.customData.event.location), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
           "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["eventCardFooter", event.customData.color])
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(event.customData.event.date), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(event.customData.event.date) + " at " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(event.customData.event.time), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
           "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)('type ' + event.customData.event.type)
         }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(event.customData.type), 3 /* TEXT, CLASS */)], 2 /* CLASS */)]);
       }), 256 /* UNKEYED_FRAGMENT */))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
