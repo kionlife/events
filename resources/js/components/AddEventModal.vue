@@ -2,24 +2,24 @@
     <div class="modal">
         <div class="modal-content">
             <h3 class="title">{{ editMode ? "Edit Event" : "Add Event" }}</h3>
-            <form @submit.prevent="editMode ? submitEditForm() : submitAddForm()">
-                <input placeholder="Event name..." type="text" id="name" v-model="event.name" required />
-                <textarea placeholder="Event description..." id="description" v-model="event.description" required></textarea>
-                <input placeholder="Location..." type="text" id="location" v-model="event.location" required />
+            <form @submit.prevent="editMode ? submitEditForm() : submitForm()">
+                <input placeholder="Event name..." type="text" id="name" v-model="formEvent.name" required />
+                <textarea placeholder="Event description..." id="description" v-model="formEvent.description" required></textarea>
+                <input placeholder="Location..." type="text" id="location" v-model="formEvent.location" required />
                 <div class="dateTimeRow">
                     <span>{{ formatDate(selectedDate) }} at</span>
-                    <input type="hidden" v-model="event.date" />
-                    <select v-model="event.time" required>
+                    <input type="hidden" v-model="formEvent.date" />
+                    <select v-model="formEvent.time" required>
                         <option
                             v-for="time in timeOptions"
                             :key="time"
                             :value="time"
-                            :selected="time === event.time"
+                            :selected="time === formEvent.time"
                         >{{ time }}</option>
                     </select>
                 </div>
 
-                <select id="event_type" v-model="event.type" required>
+                <select id="event_type" v-model="formEvent.type" required>
                     <option value="meeting">Meeting with an Expert</option>
                     <option value="qa">Question Answer</option>
                     <option value="conference">Conference</option>
@@ -27,7 +27,7 @@
                 </select>
 
                 <div class="btn-group d-flex justify-content-end align-center">
-                    <button v-if="editMode" class="addEventBtn" type="button">Delete</button>
+                    <button v-if="editMode" class="addEventBtn" @click.stop="deleteEvent(formEvent)" type="button">Delete</button>
                     <button class="cancelBtn" @click.prevent="$emit('close')">Close</button>
                     <button v-if="editMode" class="addEventBtn" type="submit">Save</button>
                     <button v-else class="addEventBtn" type="submit">Add Event</button>
@@ -61,14 +61,6 @@ export default {
     },
     data() {
         return {
-            event: this.editMode ? JSON.parse(JSON.stringify(this.event)) : {
-                name: "",
-                description: "",
-                date: "",
-                time: "",
-                location: "",
-                type: "",
-            },
             timeOptions: [
                 "00:00", "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30",
                 "04:00", "04:30", "05:00", "05:30", "06:00", "06:30", "07:00", "07:30",
@@ -79,25 +71,46 @@ export default {
             ],
         };
     },
+    computed: {
+        formEvent() {
+            return this.editMode ? JSON.parse(JSON.stringify(this.event)) : {
+                name: "",
+                description: "",
+                date: "",
+                time: "",
+                location: "",
+                type: "",
+            };
+        },
+    },
     created() {
-        this.event.date = this.selectedFormattedDate;
+        this.formEvent.date = this.selectedFormattedDate;
         if (this.editMode) {
-            this.event.time = this.formatTimeWithoutMilliseconds(this.event.time);
+            this.formEvent.time = this.formatTimeWithoutMilliseconds(this.event.time);
         }
     },
     methods: {
+        async deleteEvent(event) {
+            try {
+                await axios.delete(`/api/events/${event.id}`);
+                this.$emit("eventDeleted");
+                this.$emit("close");
+            } catch (error) {
+                console.error(error);
+            }
+        },
         async submitForm() {
             try {
-                const date = this.event.date;
-                const time = this.event.time;
+                const date = this.formEvent.date;
+                const time = this.formEvent.time;
 
                 await axios.post("/api/events", {
-                    name: this.event.name,
-                    description: this.event.description,
+                    name: this.formEvent.name,
+                    description: this.formEvent.description,
                     date: date,
                     time: time,
-                    location: this.event.location,
-                    type: this.event.type,
+                    location: this.formEvent.location,
+                    type: this.formEvent.type,
                 });
                 this.$emit("eventAdded");
                 this.$emit("close");
@@ -107,16 +120,16 @@ export default {
         },
         async submitEditForm() {
             try {
-                const date = this.event.date;
-                const time = this.event.time;
+                const date = this.formEvent.date;
+                const time = this.formEvent.time;
 
-                await axios.put(`/api/events/${this.event.id}`, {
-                    name: this.event.name,
-                    description: this.event.description,
+                await axios.put(`/api/events/${this.formEvent.id}`, {
+                    name: this.formEvent.name,
+                    description: this.formEvent.description,
                     date: date,
                     time: time,
-                    location: this.event.location,
-                    type: this.event.type,
+                    location: this.formEvent.location,
+                    type: this.formEvent.type,
                 });
                 this.$emit("eventEdited");
                 this.$emit("close");

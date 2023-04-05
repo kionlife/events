@@ -1,6 +1,6 @@
 <template>
-    <div class="">
-        <div class="col-12 mt-2">
+    <div class="mt-4">
+        <div class="col-12 mt-2 mb-2">
             <h4>Calendar</h4>
             <button
                 v-for="type in eventTypes"
@@ -43,7 +43,7 @@
                             </div>
                             <div class="eventCardFooter" :class="event.customData.color">
                                 <div class="date">
-                                    {{ event.customData.event.date }} at {{ event.customData.event.time }}
+                                    {{ formatDate(event.customData.event.date) }}, {{ event.customData.event.time }}
                                 </div>
                                 <div :class="'type ' + event.customData.event.type">
                                     {{ event.customData.type }}
@@ -63,13 +63,14 @@
             :event="selectedEvent"
             @close="closeAddEventModal"
             @eventAdded="async () => { eventsArray = await fetchEvents(); }"
+            @eventEdited="async () => { eventsArray = await fetchEvents(); }"
+            @eventDeleted="async () => { eventsArray = await fetchEvents(); }"
         />
     </div>
 </template>
 
 <script>
 import axios from "axios";
-import { ref, computed } from 'vue';
 import AddEventModal from "./AddEventModal.vue";
 
 export default {
@@ -157,6 +158,7 @@ export default {
         },
         openAddEventModal(date) {
             this.selectedDate = date;
+            this.selectedEvent = {}; // Clear the selectedEvent before opening the modal
             this.showAddEventModal = true;
         },
         openEditEventModal(event) {
@@ -167,6 +169,7 @@ export default {
         },
         closeAddEventModal() {
             this.showAddEventModal = false;
+            this.selectedEvent = {}; // Clear the selectedEvent when the modal is closed
         },
         toggleFilter(type) {
             if (this.selectedEventTypes.includes(type)) {
@@ -176,6 +179,13 @@ export default {
             } else {
                 this.selectedEventTypes.push(type);
             }
+        },
+        formatDate(dateString) {
+            const date = new Date(dateString);
+            const day = date.getDate();
+            const month = date.toLocaleString('en-US', { month: 'long' });
+
+            return `${day} ${month}`;
         },
         isTypeSelected(type) {
             return this.selectedEventTypes.includes(type);

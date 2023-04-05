@@ -9,6 +9,14 @@
     --bs-dark-rgb: #131315 !important;
 }
 
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgb(255, 78, 107) !important;
+}
+
 .vc-light {
     --vc-bg: #131315;
 }
@@ -86,6 +94,7 @@ body {
 }
 
 header, footer {
+    margin-top: 20px;
     background-color: #131315;
 }
 
@@ -96,6 +105,7 @@ header, footer {
 header .nav-link {
     color: #FFF;
     margin-left: 20px;
+    border-bottom: 2px solid rgba(255, 78, 107, 0);
 }
 
 header .nav-link:hover {
@@ -287,5 +297,9 @@ button.edit-btn {
     right: 0;
     background: none;
     border: none;
+}
+
+.modal {
+    z-index: 10 !important;
 }
 
